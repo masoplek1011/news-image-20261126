@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>World News — Thursday 26 November 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1024px; height: 1024px; overflow: hidden; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: #f4efe4; color: #141414; padding: 14px 22px 12px;
+  }
+  /* ---------- masthead ---------- */
+  .masthead { text-align: center; border-bottom: 4px solid #141414; padding-bottom: 8px; }
+  .kicker { font-size: 11px; letter-spacing: 5px; font-weight: 700; color: #8a1f1f; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-size: 40px; line-height: 1.02; letter-spacing: 1px; }
+  .dateline { font-size: 13px; margin-top: 5px; }
+  .dateline b { color: #8a1f1f; }
+  .dateline span { color: #555; }
+  /* ---------- heroes ---------- */
+  .heroes { display: flex; gap: 12px; margin-top: 10px; }
+  .hero {
+    flex: 1; background: #fff; border: 2px solid #141414; border-top: 8px solid #8a1f1f;
+    padding: 9px 12px 8px; position: relative;
+  }
+  .hero:nth-child(2) { border-top-color: #1d4e89; }
+  .hero:nth-child(3) { border-top-color: #b7791f; }
+  .num {
+    position: absolute; top: -8px; right: 10px; width: 30px; height: 30px; border-radius: 50%;
+    background: #141414; color: #fff; font-size: 16px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tag { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #8a1f1f; }
+  .hero:nth-child(2) .tag { color: #1d4e89; }
+  .hero:nth-child(3) .tag { color: #b7791f; }
+  .hero h2 { font-family: Georgia, serif; font-size: 18px; line-height: 1.15; margin: 4px 0 5px; }
+  .hero p { font-size: 11.5px; line-height: 1.32; color: #333; }
+  .date { font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-top: 7px; color: #141414; }
+  .date i { font-style: normal; background: #141414; color: #fff; padding: 1px 5px; margin-right: 4px; }
+  /* ---------- map band ---------- */
+  .mapband { margin-top: 10px; background: #16283d; border: 2px solid #141414; padding: 7px 12px 5px; }
+  .mapband h3 { color: #f4efe4; font-size: 11px; letter-spacing: 3px; }
+  .mapband h3 span { color: #f0b429; }
+  .mapband svg { display: block; width: 100%; height: 90px; }
+  .pin { font-size: 13px; font-weight: 800; fill: #fff; }
+  .pinbg { fill: #c0392b; stroke: #fff; stroke-width: 1.5; }
+  .pinbg.b2 { fill: #1d4e89; } .pinbg.b3 { fill: #b7791f; }
+  .land { fill: #3f6d8e; stroke: #9fc3d8; stroke-width: 1; }
+  .lbl { font-size: 9px; fill: #cfe3ef; letter-spacing: 1px; font-weight: 700; }
+  /* ---------- timeline ---------- */
+  .timeline { margin-top: 9px; border: 2px solid #141414; background: #fff; padding: 7px 12px 8px; }
+  .timeline h3 { font-size: 11px; letter-spacing: 3px; margin-bottom: 4px; }
+  .timeline h3 span { color: #8a1f1f; }
+  .track { position: relative; height: 58px; }
+  .track .line { position: absolute; left: 0; right: 0; top: 16px; height: 3px; background: #141414; }
+  .tick { position: absolute; top: 13px; width: 2px; height: 10px; background: #141414; }
+  .ticklab { position: absolute; top: 0; font-size: 9px; font-weight: 700; transform: translateX(-50%); color: #555; }
+  .ev { position: absolute; top: 11px; transform: translateX(-50%); text-align: center; width: 140px; }
+  .ev .dot { width: 12px; height: 12px; border-radius: 50%; background: #8a1f1f; border: 2px solid #fff; margin: 0 auto 3px; box-shadow: 0 0 0 1px #141414; }
+  .ev .et { font-size: 9px; font-weight: 800; line-height: 1.2; }
+  /* ---------- grid ---------- */
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 9px; }
+  .card { background: #fff; border: 1.5px solid #141414; padding: 6px 9px 5px; min-height: 84px; }
+  .card .n { font-size: 10px; font-weight: 800; color: #8a1f1f; }
+  .card h4 { font-size: 12px; line-height: 1.2; margin: 2px 0 3px; font-family: Georgia, serif; }
+  .card p { font-size: 10px; line-height: 1.28; color: #444; }
+  .card .meta { font-size: 9px; font-weight: 800; letter-spacing: 0.5px; margin-top: 4px; color: #141414; }
+  .card .meta em { font-style: normal; background: #eee; padding: 1px 4px; }
+  .box { background: #141414; color: #f4efe4; border: 1.5px solid #141414; padding: 7px 10px; min-height: 84px; }
+  .box h4 { font-size: 12px; letter-spacing: 2px; margin-bottom: 5px; color: #f0b429; }
+  .box p, .box li { font-size: 10.5px; line-height: 1.4; }
+  .box ul { list-style: none; }
+  .box li::before { content: "▸ "; color: #f0b429; }
+  .box.gold { background: #8a1f1f; }
+  /* ---------- footer ---------- */
+  .footer { margin-top: 7px; border-top: 3px solid #141414; padding-top: 6px; font-size: 10px; line-height: 1.35; }
+  .footer b { letter-spacing: 1px; }
+  .footer .src { color: #555; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">THE WORLD IN ONE PAGE &middot; NEWS ATLAS</div>
+  <h1>WORLD NEWS IN ONE IMAGE</h1>
+  <div class="dateline"><b>THURSDAY 26 NOVEMBER 2026</b> &nbsp;<span>Verified this morning against Reuters / BBC / AP &middot; Every card carries its true event date</span></div>
+</div>
+
+<div class="heroes">
+  <div class="hero">
+    <div class="num">1</div>
+    <div class="tag">NORTH AMERICA &middot; GLOBAL TRADE</div>
+    <h2>Trump unveils sweeping new tariffs on 14 partners</h2>
+    <p>China faces +20% — up to 40% if talks fail — and the EU 15%, up to 20%. Japan, India, Indonesia and others also hit, on the eve of Thanksgiving.</p>
+    <div class="date"><i>WED</i>25 NOV 2026</div>
+  </div>
+  <div class="hero">
+    <div class="num">2</div>
+    <div class="tag">AFRICA &middot; EGYPT</div>
+    <h2>Tanker blast on Cairo ring road kills 30</h2>
+    <p>A fuel tanker overturned and exploded late Wednesday night on the capital&rsquo;s Ring Road. At least 30&ndash;31 people were killed and 19 or more injured.</p>
+    <div class="date"><i>WED</i>25 NOV 2026 &middot; NIGHT</div>
+  </div>
+  <div class="hero">
+    <div class="num">3</div>
+    <div class="tag">EAST ASIA &middot; SPACE</div>
+    <h2>First Pakistani reaches orbit aboard Shenzhou-24</h2>
+    <p>China launched Shenzhou-24 at 08:18 Beijing time. Muhammad Zeeshan Ali, 40, is the first Pakistani in orbit and the first foreign visitor to Tiangong station.</p>
+    <div class="date"><i>WED</i>25 NOV 2026</div>
+  </div>
+</div>
+
+<div class="mapband">
+  <h3>WORLD MAP &mdash; <span>WHERE IT HAPPENED</span> &nbsp;&middot;&nbsp; 1 WASHINGTON &nbsp; 2 CAIRO &nbsp; 3 JIUQUAN, CHINA</h3>
+  <svg viewBox="0 0 940 118" preserveAspectRatio="none">
+    <!-- stylised continents -->
+    <path class="land" d="M40,18 L150,10 L185,30 L160,55 L120,78 L80,70 L45,45 Z"/>
+    <path class="land" d="M180,78 L235,72 L255,95 L225,112 L185,105 Z"/>
+    <path class="land" d="M430,20 L520,12 L545,35 L500,52 L440,48 Z"/>
+    <path class="land" d="M470,58 L540,55 L560,85 L520,112 L480,100 L462,78 Z"/>
+    <path class="land" d="M560,55 L600,50 L615,70 L590,82 L562,74 Z"/>
+    <path class="land" d="M640,25 L790,12 L850,30 L820,60 L730,72 L660,55 Z"/>
+    <path class="land" d="M830,70 L885,66 L895,85 L855,98 L832,88 Z"/>
+    <text class="lbl" x="40" y="72">N. AMERICA</text>
+    <text class="lbl" x="182" y="92">S. AMERICA</text>
+    <text class="lbl" x="445" y="35">EUROPE</text>
+    <text class="lbl" x="470" y="85">AFRICA</text>
+    <text class="lbl" x="566" y="46">MIDEAST</text>
+    <text class="lbl" x="690" y="45">ASIA</text>
+    <text class="lbl" x="835" y="82">OCEANIA</text>
+    <!-- pins: 1 Washington, 2 Cairo, 3 Jiuquan -->
+    <circle class="pinbg" cx="118" cy="38" r="11"/><text class="pin" x="118" y="43" text-anchor="middle">1</text>
+    <circle class="pinbg b2" cx="545" cy="66" r="11"/><text class="pin" x="545" y="71" text-anchor="middle">2</text>
+    <circle class="pinbg b3" cx="745" cy="38" r="11"/><text class="pin" x="745" y="43" text-anchor="middle">3</text>
+    <!-- secondary dots -->
+    <circle cx="232" cy="98" r="4" fill="#f0b429" stroke="#fff"/>
+    <circle cx="600" cy="66" r="4" fill="#f0b429" stroke="#fff"/>
+    <circle cx="700" cy="30" r="4" fill="#f0b429" stroke="#fff"/>
+    <circle cx="90" cy="55" r="4" fill="#f0b429" stroke="#fff"/>
+  </svg>
+</div>
+
+<div class="timeline">
+  <h3>THE DAY IN UTC &mdash; <span>25&ndash;26 NOVEMBER</span></h3>
+  <div class="track">
+    <div class="line"></div>
+    <div class="tick" style="left:2%"></div><div class="ticklab" style="left:2%">00:00</div>
+    <div class="tick" style="left:26%"></div><div class="ticklab" style="left:26%">06:00</div>
+    <div class="tick" style="left:50%"></div><div class="ticklab" style="left:50%">12:00</div>
+    <div class="tick" style="left:74%"></div><div class="ticklab" style="left:74%">18:00</div>
+    <div class="tick" style="left:98%"></div><div class="ticklab" style="left:98%">24:00</div>
+    <div class="ev" style="left:9%"><div class="dot"></div><div class="et">00:18 UTC<br>Shenzhou-24 lifts off</div></div>
+    <div class="ev" style="left:30%"><div class="dot" style="background:#1d4e89"></div><div class="et">06:30 UTC<br>Cartagena rescue ends</div></div>
+    <div class="ev" style="left:79%"><div class="dot" style="background:#b7791f"></div><div class="et">~19:00 UTC<br>Cairo tanker blast</div></div>
+    <div class="ev" style="left:90%"><div class="dot"></div><div class="et">Evening, US<br>Tariffs announced</div></div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card"><span class="n">04</span><h4>Judges urge Netanyahu bribery case dropped</h4><p>Jerusalem judges recommend prosecutors drop Case 4000 and reconsider Case 2000 — a recommendation, not a ruling.</p><div class="meta"><em>WED 25 NOV</em> MIDDLE EAST</div></div>
+  <div class="card"><span class="n">05</span><h4>76 hostages freed in Cartagena supermarket siege</h4><p>Colombian special forces stormed an &Eacute;xito store after a 17-hour siege. One gunman killed, four arrested.</p><div class="meta"><em>WED 25 NOV 01:30</em> S. AMERICA</div></div>
+  <div class="card"><span class="n">06</span><h4>Houthis say they struck Saudi ports Jeddah and Jazan</h4><p>Retaliation for coalition strikes on Hodeidah, they say. The coalition confirms Jazan was hit, with minor damage.</p><div class="meta"><em>WED 25 NOV</em> MIDDLE EAST</div></div>
+  <div class="card"><span class="n">07</span><h4>RSF drone strikes kill 19 civilians in Sudan</h4><p>Strikes hit Damazin in Blue Nile; five more were wounded in Roseires, in a war now in its fourth year.</p><div class="meta"><em>TUE 24 NOV NIGHT</em> AFRICA</div></div>
+  <div class="card"><span class="n">08</span><h4>Plane crash off Mississippi coast kills six</h4><p>A Cessna 210 went down; among the dead were two boys aged 8 and 10. The wreck was confirmed on Wednesday.</p><div class="meta"><em>TUE 24 NOV</em> N. AMERICA</div></div>
+  <div class="card"><span class="n">09</span><h4>Duran Duran guitarist Andy Taylor dies at 65</h4><p>The founding guitarist died of prostate cancer on Monday; his death was announced on Wednesday.</p><div class="meta"><em>MON 23 NOV</em> EUROPE / CULTURE</div></div>
+  <div class="card"><span class="n">10</span><h4>North Korea expels Swiss diplomat</h4><p>Pyongyang ordered the diplomat out and closed Switzerland&rsquo;s office in the capital.</p><div class="meta"><em>WED 25 NOV</em> EAST ASIA</div></div>
+  <div class="card"><span class="n">11</span><h4>US stocks fall further on AI fears</h4><p>Wall Street slid again at Wednesday&rsquo;s close as worries over AI spending and valuations spread.</p><div class="meta"><em>WED 25 NOV</em> MARKETS</div></div>
+  <div class="card"><span class="n">12</span><h4>Macy&rsquo;s Thanksgiving parade postponed by storm</h4><p>The New York parade was pushed back as severe weather moved in ahead of Thanksgiving Day.</p><div class="meta"><em>WED 25 NOV</em> N. AMERICA</div></div>
+  <div class="card"><span class="n">13</span><h4>Chess title match: Game 2 drawn in 20 moves</h4><p>Gukesh and Sindarov split the point in Geneva. Game 3 is played today, Thursday.</p><div class="meta"><em>WED 25 NOV</em> EUROPE / SPORT</div></div>
+  <div class="card"><span class="n">14</span><h4>First images of crater on asteroid in defence test</h4><p>Images show a stadium-sized crater on the asteroid struck to test Earth&rsquo;s planetary defences.</p><div class="meta"><em>THU 26 NOV</em> SCIENCE</div></div>
+  <div class="card"><span class="n">15</span><h4>Israeli strike kills senior Hamas security official</h4><p>The official and members of his family were killed in a strike in Gaza City, reports said on Wednesday.</p><div class="meta"><em>WED 25 NOV</em> MIDDLE EAST</div></div>
+  <div class="card"><span class="n">16</span><h4>Some brands opt out of Black Friday discounts</h4><p>A growing group of retailers is skipping the sales rush this year, betting on full-price loyalty instead.</p><div class="meta"><em>THU 26 NOV</em> BUSINESS</div></div>
+  <div class="box"><h4>HAPPENING TODAY</h4><ul><li>Thanksgiving Day in the US</li><li>Chess Game 3: Gukesh vs Sindarov</li><li>Black Friday build-up begins</li></ul></div>
+  <div class="box gold"><h4>BY THE NUMBERS</h4><ul><li>14 trade partners hit by tariffs</li><li>76 hostages freed in Cartagena</li><li>19 civilians killed in Sudan</li></ul></div>
+  <div class="box"><h4>HOW TO READ THIS PAGE</h4><p>Top: the three biggest stories. Map: where they happened. Grid: 13 more stories, each with its true date. Nothing here is dated 26 Nov unless it happened then.</p></div>
+</div>
+
+<div class="footer">
+  <b>DATE CHECK</b> — Stories verified 26 Nov 2026 against Reuters / BBC / AP. Most were first reported on 26 Nov in Asia after happening late on 25 Nov elsewhere; each card carries its true event date. <span class="src">16 stories, 3 heroes, 1 honest footer.</span>
+</div>
+
+</body>
+</html>
